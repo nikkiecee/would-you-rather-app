@@ -7,37 +7,38 @@ import {
   Segment,
   Divider,
 } from "semantic-ui-react";
-import NavBar from "./NavBar";
+
 
 
 class CreateQuestion extends Component {
     state ={
-        text: ''
+        optionOne: '',
+        optionTwo: ''
     }
     handleChange = (e) =>{
-        const text = e.target.value
-
-        this.setState(() =>({
-            text,
-        }))
+        this.setState({
+          [e.target.id]: e.target.value
+        })
     }
 
-    handleSubmit = (e) =>{
+    handleAddQuestion = (e) =>{
         e.preventDefault()
+        const {history} = this.props;
+    console.log(this.props);
+        // const { optionOne, optionTwo } = this.state
 
-        const { text } = this.state
-
-       console.log('New Poll: ', text);
-
+       console.log('New Poll: ', );
+      //  this.props.dispatch(addQuestionToUser(this.state.value));
        this.setState(() =>({
         text: ''
     }))
+       return history.push('/')
+       
 
     }
   render() {
     return (
       <div>
-        <NavBar />
         <Grid
           textAlign="center"
           style={{ height: "100vh", marginTop: "20px" }}
@@ -57,17 +58,17 @@ class CreateQuestion extends Component {
                   Would you rather...
                 </Header>
                 <Form.Field>
-                  <input placeholder="Enter Option One Text Here" name='optionOne' value='optionOne' 
+                  <input placeholder="Enter Option One Text Here" id='optionOne'value={this.state.optionOne}
                   onChange={this.handleChange}/>
                 </Form.Field>
                 <Divider horizontal>
                   <strong>Or</strong>
                 </Divider>
                 <Form.Field>
-                  <input placeholder="Enter Option Two Text Here" name='optionTwo' value='optionTwo' onChange={this.handleChange}/>
+                  <input placeholder="Enter Option Two Text Here" id='optionTwo' value={this.state.optionTwo} onChange={this.handleChange}/>
                 </Form.Field>
                 <Form.Field>
-                  <Button color="purple" fluid size="large">
+                  <Button color="purple" fluid size="large" onClick={this.handleAddQuestion}>
                     Submit
                   </Button>
                 </Form.Field>

@@ -1,15 +1,19 @@
 import React, { Component } from "react";
-import { Menu } from "semantic-ui-react";
-import { NavLink } from "react-router-dom";
+import { Menu, Image, Button } from "semantic-ui-react";
+import { Link, } from "react-router-dom";
 import { connect } from "react-redux";
-import { setAuthedUser } from "../actions/authedUser";
+import { withRouter } from "react-router-dom";
+import { removeAuthedUser } from "../actions/authedUser";
 
 class NavBar extends Component {
   state = { activeItem: "" };
 
-  onLogout = (e) => {
+   handleLogout = (e) => {
     e.preventDefault();
-    this.props.setAuthedUser(null);
+    const {history} = this.props;
+    console.log(this.props);
+    this.props.dispatch(removeAuthedUser())
+    return history.push('/')
   };
 
   render() {
@@ -24,41 +28,48 @@ class NavBar extends Component {
               <Menu.Item
                 name="home"
                 active={activeItem === "home"}
-                as={NavLink}
+                as={Link}
                 to="/"
                 onClick={this.handleItemClick}
               />
               <Menu.Item
                 name="new question"
                 active={activeItem === "new question"}
-                as={NavLink}
+                as={Link}
                 to="/add"
                 onClick={this.handleItemClick}
               />
               <Menu.Item
                 name="leaderboard"
                 active={activeItem === "leaderboard"}
-                as={NavLink}
+                as={Link}
                 to="/leaderboard"
                 onClick={this.handleItemClick}
               />
               <Menu.Menu position="right">
                 <Menu.Item>
                   <span>
-                    <img
-                      src={users[authedUser].name}
+                    <Image
+                      src={users[authedUser].avatarURL}
                       avatar
                       spaced="right"
                       verticalAlign="bottom"
                       alt=""
                     />
-                    {users[authedUser].name}{" "}
+                    {users[authedUser].name}
                   </span>
                 </Menu.Item>
                 <Menu.Item
-                  name="logout"
-                  active={activeItem === "logout"}
-                  onClick={this.onLogout}
+                />
+                <Button
+                  basic
+                  compact
+                  content='Logout'
+                  labelPosition='right'
+                  size="small"
+                  icon='log out'
+                  onClick={this.handleLogout}
+                  style={{ marginBottom: "0.5em", marginTop: "0.5em" }}
                 />
               </Menu.Menu>
             </>
@@ -67,21 +78,21 @@ class NavBar extends Component {
               <Menu.Item
                 name="home"
                 active={activeItem === "home"}
-                as={NavLink}
+                as={Link}
                 to="/"
                 onClick={this.handleItemClick}
               />
               <Menu.Item
                 name="new question"
                 active={activeItem === "new question"}
-                as={NavLink}
+                as={Link}
                 to="/add"
                 onClick={this.handleItemClick}
               />
               <Menu.Item
                 name="leaderboard"
                 active={activeItem === "leaderboard"}
-                as={NavLink}
+                as={Link}
                 to="/leaderboard"
                 onClick={this.handleItemClick}
               />
@@ -92,11 +103,11 @@ class NavBar extends Component {
     );
   }
 }
-function mapStateToProps({ authedUser, users }, props) {
+function mapStateToProps({ authedUser, users }) {
   return {
     authedUser,
     users,
     user: users[authedUser],
   };
 }
-export default connect(mapStateToProps, { setAuthedUser })(NavBar);
+export default withRouter(connect(mapStateToProps)(NavBar));

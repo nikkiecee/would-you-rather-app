@@ -5,7 +5,7 @@ import NavBar from "./NavBar";
 const NotFound = () => {
   <div>
     <NavBar />
-    <Header as="h1" textAlign="center">
+    <Header as="h1" textAlign="center" verticalAlign='middle'>
       404- Page NotFound
     </Header>
     ;
