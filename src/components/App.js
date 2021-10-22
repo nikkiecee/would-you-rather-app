@@ -15,7 +15,6 @@ import CreateQuestion from "./CreateQuestion";
 import PollResult from "./PollResult";
 import LeaderBoard from "./LeaderBoard";
 import Dashboard from "./Dashboard";
-import PollPreview from "./PollPreview";
 // import NotFound from "./NotFound";
 
 class App extends Component {
@@ -34,7 +33,6 @@ class App extends Component {
               <Route exact path="/" render={() => <Dashboard />} />
               <Route exact path="/questions/:id" render={() => <QuestionCard />} />
               <Route exact path="/add" render={() => <CreateQuestion />} />
-              <Route exact path="/preview" render={() => <PollPreview/>} />
               <Route exact path="/result" render={() => <PollResult />} />
               <Route exact path="/leaderboard" render={() => <LeaderBoard />} />
               {/* <Route render={() => <NotFound />} /> */}

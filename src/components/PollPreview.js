@@ -6,7 +6,8 @@ import { Link } from "react-router-dom";
 
 class PollPreview extends Component {
   render() {
-  
+const { question, user, id } = this.props
+
     return (
       
       <div>
@@ -17,7 +18,7 @@ class PollPreview extends Component {
         >
           <Grid.Column style={{ maxWidth: 400 }}>
             <Header as="h5" block attached="top" textAlign="left">
-              <Header.Content> asks:</Header.Content>
+              <Header.Content>{user.name} asks:</Header.Content>
             </Header>
 
             <Segment attached>
@@ -28,7 +29,7 @@ class PollPreview extends Component {
                   </Grid.Column>
                   <Grid.Column width={11} textAlign="left">
                     <Header as="h4">Would you Rather...</Header>
-                    <p>......</p>
+                    <p>.....</p>
                     <Link to=''>
                       <Button fluid basic color="purple" size="medium">
                         View Poll
@@ -45,10 +46,14 @@ class PollPreview extends Component {
   }
 }
 
-function mapStateToProps() {
-
+function mapStateToProps({users, questions, authedUser}, {id}) {
+  const question = questions[id];
+  const user = users[question.author]
   return {
-
+    question, 
+    user,
+    authedUser,
+    id
   };
 }
 
