@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import {
   Button,
   Form,
@@ -7,68 +9,81 @@ import {
   Segment,
   Divider,
 } from "semantic-ui-react";
-
-
+import { handleAddQuestion } from "../actions/questions";
 
 class CreateQuestion extends Component {
-    state ={
-        optionOne: '',
-        optionTwo: ''
-    }
-    handleChange = (e) =>{
-        this.setState({
-          [e.target.id]: e.target.value
-        })
-    }
+  state = {
+    optionOne: "",
+    optionTwo: "",
+  };
+  handleOptionOne = (e) => {
+    const optionOne = this.state.optionOne;
+    this.setState({
+      optionOne,
+    });
+  };
 
-    handleAddQuestion = (e) =>{
-        e.preventDefault()
-        const {history} = this.props;
-    console.log(this.props);
-        // const { optionOne, optionTwo } = this.state
+  handleOptionTwo = (e) => {
+    const optionTwo = this.state.optionTwo;
+    this.setState({
+      optionTwo,
+    });
+  };
 
-       console.log('New Poll: ', );
-      //  this.props.dispatch(addQuestionToUser(this.state.value));
-       this.setState(() =>({
-        text: ''
-    }))
-       return history.push('/')
-       
-
-    }
+  handleSubmitQuestion = (e) => {
+    e.preventDefault();
+    const { history } = this.props;
+    const { optionOne, optionTwo } = this.state;
+    this.props.dispatch(handleAddQuestion(optionOne, optionTwo));
+    return history.push("/");
+  };
   render() {
+    // const disabled = this.state.optionOne ==='' || this.state.optionTwo ==='';
     return (
       <div>
         <Grid
-          textAlign="center"
+          centered
           style={{ height: "100vh", marginTop: "20px" }}
           verticalAlign="top"
         >
-          <Grid.Column style={{ maxWidth: 500 }}>
-            <Header as="h2" block attached="top" textAlign="center">
+          <Grid.Column style={{ maxWidth: 500 }} >
+            <Header as="h2" block attached="top" >
               <Header.Content>Create New Question</Header.Content>
             </Header>
 
             <Segment attached>
-              <Form size="large" textAlign="left" onSubmit={this.handleSubmit}>
-                <Header as="h5" textAlign="left">
-                  Complete the question:
-                </Header>
-                <Header as="h3" textAlign="left">
-                  Would you rather...
-                </Header>
+              <Form size="large" onSubmit={this.handleSubmitQuestion}>
+                <Header as="h5">Complete the question:</Header>
+                <Header as="h3">Would you rather...</Header>
                 <Form.Field>
-                  <input placeholder="Enter Option One Text Here" id='optionOne'value={this.state.optionOne}
-                  onChange={this.handleChange}/>
+                  <input
+                    placeholder="Enter Option One Text Here"
+                    id="optionOne"
+                    value={this.state.optionOne}
+                    onChange={this.handleOptionOne}
+                    required
+                  />
                 </Form.Field>
                 <Divider horizontal>
                   <strong>Or</strong>
                 </Divider>
                 <Form.Field>
-                  <input placeholder="Enter Option Two Text Here" id='optionTwo' value={this.state.optionTwo} onChange={this.handleChange}/>
+                  <input
+                    placeholder="Enter Option Two Text Here"
+                    id="optionTwo"
+                    value={this.state.optionTwo}
+                    onChange={this.handleOptionTwo}
+                    required
+                  />
                 </Form.Field>
                 <Form.Field>
-                  <Button color="purple" fluid size="large" onClick={this.handleAddQuestion}>
+                  <Button
+                    color="purple"
+                    fluid
+                    size="large"
+                    onClick={this.handleSubmitQuestion}
+                    // disabled={disabled}
+                  >
                     Submit
                   </Button>
                 </Form.Field>
@@ -80,4 +95,9 @@ class CreateQuestion extends Component {
     );
   }
 }
-export default CreateQuestion;
+function mapStateToProps({ authedUser }) {
+  return {
+    authedUser,
+  };
+}
+export default withRouter(connect(mapStateToProps)(CreateQuestion));

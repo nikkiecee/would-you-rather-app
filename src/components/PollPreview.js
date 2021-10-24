@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import { Button, Grid, Header, Segment, Image } from "semantic-ui-react";
-import { Link } from "react-router-dom";
 
 class PollPreview extends Component {
+
   render() {
 const { question, user, id } = this.props
 
@@ -16,7 +16,7 @@ const { question, user, id } = this.props
           style={{ height: "35vh", marginTop: "10px" }}
           verticalAlign="top"
         >
-          <Grid.Column style={{ maxWidth: 400 }}>
+          <Grid.Column style={{ maxWidth: 500}}>
             <Header as="h5" block attached="top" textAlign="left">
               <Header.Content>{user.name} asks:</Header.Content>
             </Header>
@@ -25,13 +25,13 @@ const { question, user, id } = this.props
               <Grid columns={2} divided>
                 <Grid.Row>
                   <Grid.Column width={5}>
-                    <Image src='' size="small" circular />
+                    <Image src={user.avatarURL} size="small" circular />
                   </Grid.Column>
                   <Grid.Column width={11} textAlign="left">
                     <Header as="h4">Would you Rather...</Header>
-                    <p>.....</p>
-                    <Link to=''>
-                      <Button fluid basic color="purple" size="medium">
+                    <p>..{question.optionOne.text.substr(0,20)}...</p>
+                    <Link to={`question/${id}`}>
+                      <Button fluid  color="purple" size="medium">
                         View Poll
                       </Button>
                     </Link>
@@ -46,14 +46,14 @@ const { question, user, id } = this.props
   }
 }
 
-function mapStateToProps({users, questions, authedUser}, {id}) {
-  const question = questions[id];
+function mapStateToProps({users, questions, authedUser}, {questionId}) {
+  const question = questions[questionId];
   const user = users[question.author]
   return {
     question, 
     user,
     authedUser,
-    id
+    id: questionId
   };
 }
 

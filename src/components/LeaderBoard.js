@@ -7,13 +7,11 @@ import {
   Label,
   Divider,
 } from "semantic-ui-react";
-import NavBar from "./NavBar";
 
 export class LeaderBoard extends Component {
   render() {
     return (
       <div>
-        <NavBar/>
         <Grid
           textAlign="center"
           style={{ height: "100vh", marginTop: "20px" }}

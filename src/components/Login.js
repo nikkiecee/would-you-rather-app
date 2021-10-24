@@ -22,7 +22,6 @@ class Login extends Component {
 
   handleLogin = (e) => {
     const {history} = this.props;
-    console.log(this.props);
     e.preventDefault();
     this.props.dispatch(setAuthedUser(this.state.value));
     return history.push('/')

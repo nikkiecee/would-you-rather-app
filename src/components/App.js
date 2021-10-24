@@ -1,50 +1,61 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {
-  BrowserRouter as 
-  Switch,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { LoadingBar } from "react-redux-loading";
 import { handleInitialData } from "../actions/shared";
-import NavBar from "./NavBar"
+import PrivateRoute from "./PrivateRoute";
+import Dashboard from "./Dashboard";
+import NavBar from "./NavBar";
 import Login from "./Login";
 import QuestionCard from "./QuestionCard";
 import CreateQuestion from "./CreateQuestion";
-import PollResult from "./PollResult";
 import LeaderBoard from "./LeaderBoard";
-import Dashboard from "./Dashboard";
-// import NotFound from "./NotFound";
 
 class App extends Component {
   componentDidMount() {
     this.props.dispatch(handleInitialData());
   }
   render() {
+    const { isAuthenticated } = this.props;
     return (
-     <Switch>
-       <NavBar/>
+      <Router>
+        <NavBar />
         <LoadingBar />
-          {this.props.notAuthenticated === true ? (
-        <Route path="/" render={() => <Login />} />
-          ) : (
-            <Switch>
-              <Route exact path="/" render={() => <Dashboard />} />
-              <Route exact path="/questions/:id" render={() => <QuestionCard />} />
-              <Route exact path="/add" render={() => <CreateQuestion />} />
-              <Route exact path="/result" render={() => <PollResult />} />
-              <Route exact path="/leaderboard" render={() => <LeaderBoard />} />
-              {/* <Route render={() => <NotFound />} /> */}
-            </Switch>
-          )}ii
-      </Switch>
+        <Switch>
+          <PrivateRoute
+            exact
+            path="/"
+            isAuthenticated={isAuthenticated}
+            component={Dashboard}
+          />
+          <PrivateRoute
+            exact
+            path="/questions/:id"
+            isAuthenticated={isAuthenticated}
+            component={QuestionCard}
+          />
+          <PrivateRoute
+            exact
+            path="/add"
+            isAuthenticated={isAuthenticated}
+            component={CreateQuestion}
+          />
+          <PrivateRoute
+            exact
+            path="/leaderboard"
+            isAuthenticated={isAuthenticated}
+            component={LeaderBoard}
+          />
+          <Route exact path="/login" component={Login} />
+        </Switch>
+      </Router>
     );
   }
 }
 function mapStateToProps({ authedUser, users }) {
   return {
-    notAuthenticated: authedUser === null,
+    isAuthenticated: authedUser !== null,
     authedUser,
     users,
   };
