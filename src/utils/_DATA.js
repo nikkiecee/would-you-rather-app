@@ -9,7 +9,7 @@ let users = {
       "am8ehyc8byjqgar0jgpub9": 'optionTwo',
       "loxhs1bqm25b708cmbf3g": 'optionTwo'
     },
-    questions: ['8xf0y6ziyjabvozdd253nd', 'am8ehyc8byjqgar0jgpub9']
+    questions: ['8xf0y6ziyjabvozdd253nd', 'am8ehyc8byjqgar0jgpub9', 'lqhftuz5zw9ic3q18djeb']
   },
   nicoleeluwa: {
     id: 'nicoleeluwa',
@@ -21,7 +21,7 @@ let users = {
       "am8ehyc8byjqgar0jgpub9": 'optionTwo',
       "loxhs1bqm25b708cmbf3g": 'optionTwo'
     },
-    questions: [],
+    questions: ["4osho9l7puv05gu907sew5p"],
   },
   tylermcginnis: {
     id: 'tylermcginnis',
@@ -53,7 +53,7 @@ let users = {
       "vthrdm985a262al8qx3do": 'optionTwo',
       "6ni6ok3ym7mf1p33lnez": 'optionOne'
     },
-    questions: ['6ni6ok3ym7mf1p33lnez', 'xj352vofupe1dqz9emx13r'],
+    questions: ['6ni6ok3ym7mf1p33lnez', 'xj352vofupe1dqz9emx13r', "dz97v84tvv5n5x4nqgpx1"],
   }
 }
 
@@ -71,6 +71,19 @@ let questions = {
       text: 'have horrible long term memory'
     }
   },
+  "lqhftuz5zw9ic3q18djeb": {
+    id: 'lqhftuz5zw9ic3q18djeb',
+    author: 'sarahedo',
+    timestamp: 1635175999375,
+    optionOne: {
+      votes: [],
+      text: "become a Teacher",
+    },
+    optionTwo: {
+      votes: [],
+      text: "become an Astronaut"
+    }
+  },
   "6ni6ok3ym7mf1p33lnez": {
     id: '6ni6ok3ym7mf1p33lnez',
     author: 'johndoe',
@@ -82,6 +95,32 @@ let questions = {
     optionTwo: {
       votes: ['johndoe', 'sarahedo'],
       text: 'become a supervillian'
+    }
+  },
+  "dz97v84tvv5n5x4nqgpx1": {
+    id: "dz97v84tvv5n5x4nqgpx1",
+    author: 'johndoe',
+    timestamp: 1635175910136,
+    optionOne: {
+      votes: [],
+      text: 'be pessimistic',
+    },
+    optionTwo: {
+      votes: [],
+      text: 'be optimistic'
+    }
+  },
+  "4osho9l7puv05gu907sew5p": {
+    id: "4osho9l7puv05gu907sew5p",
+    author: 'nicoleeluwa',
+    timestamp:  1635175843685,
+    optionOne: {
+      votes: [],
+      text: 'be good at bowling',
+    },
+    optionTwo: {
+      votes: [],
+      text: 'be good at soccer'
     }
   },
   "am8ehyc8byjqgar0jgpub9": {

@@ -10,9 +10,12 @@ export default function users(state = {}, action) {
     case ADD_QUESTION_TO_USER:
       return {
         ...state,
-        [action.authedUser]: {
-          ...state[action.authedUser],
-          questions: [...state[action.authedUser].questions, action.questionId],
+        [action.question.author]: {
+          ...state[action.question.author],
+          questions: [
+            ...state[action.question.author].questions,
+            action["question"]["id"],
+          ],
         },
       };
     default:

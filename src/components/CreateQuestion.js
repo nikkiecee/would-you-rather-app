@@ -13,32 +13,22 @@ import { handleAddQuestion } from "../actions/questions";
 
 class CreateQuestion extends Component {
   state = {
-    optionOne: "",
-    optionTwo: "",
-  };
-  handleOptionOne = (e) => {
-    const optionOne = this.state.optionOne;
-    this.setState({
-      optionOne,
-    });
+    optionOneText: "",
+    optionTwoText: "",
   };
 
-  handleOptionTwo = (e) => {
-    const optionTwo = this.state.optionTwo;
-    this.setState({
-      optionTwo,
-    });
-  };
+  handleOptions = (e, { name, value }) => this.setState({ [name]: value });
 
   handleSubmitQuestion = (e) => {
     e.preventDefault();
     const { history } = this.props;
-    const { optionOne, optionTwo } = this.state;
-    this.props.dispatch(handleAddQuestion(optionOne, optionTwo));
+    const { optionOneText, optionTwoText } = this.state;
+    this.props.dispatch(handleAddQuestion(optionOneText, optionTwoText));
     return history.push("/");
   };
   render() {
-    // const disabled = this.state.optionOne ==='' || this.state.optionTwo ==='';
+    const disabled = this.state.optionOneText ==='' || this.state.optionTwoText ==='';
+    const { optionOneText, optionTwoText } = this.state;
     return (
       <div>
         <Grid
@@ -46,8 +36,8 @@ class CreateQuestion extends Component {
           style={{ height: "100vh", marginTop: "20px" }}
           verticalAlign="top"
         >
-          <Grid.Column style={{ maxWidth: 500 }} >
-            <Header as="h2" block attached="top" >
+          <Grid.Column style={{ maxWidth: 500 }}>
+            <Header as="h2" block attached="top" textAlign="center">
               <Header.Content>Create New Question</Header.Content>
             </Header>
 
@@ -55,38 +45,35 @@ class CreateQuestion extends Component {
               <Form size="large" onSubmit={this.handleSubmitQuestion}>
                 <Header as="h5">Complete the question:</Header>
                 <Header as="h3">Would you rather...</Header>
-                <Form.Field>
-                  <input
-                    placeholder="Enter Option One Text Here"
-                    id="optionOne"
-                    value={this.state.optionOne}
-                    onChange={this.handleOptionOne}
-                    required
-                  />
-                </Form.Field>
+                <Form.Input
+                  placeholder="Enter Option One Text Here"
+                  name="optionOneText"
+                  value={optionOneText}
+                  onChange={this.handleOptions}
+                  required
+                />
+
                 <Divider horizontal>
                   <strong>Or</strong>
                 </Divider>
-                <Form.Field>
-                  <input
-                    placeholder="Enter Option Two Text Here"
-                    id="optionTwo"
-                    value={this.state.optionTwo}
-                    onChange={this.handleOptionTwo}
-                    required
-                  />
-                </Form.Field>
-                <Form.Field>
-                  <Button
-                    color="purple"
-                    fluid
-                    size="large"
-                    onClick={this.handleSubmitQuestion}
-                    // disabled={disabled}
-                  >
-                    Submit
-                  </Button>
-                </Form.Field>
+                <Form.Input
+                  type="text"
+                  placeholder="Enter Option Two Text Here"
+                  name="optionTwoText"
+                  value={optionTwoText}
+                  onChange={this.handleOptions}
+                  required
+                />
+
+                <Button
+                  color="purple"
+                  fluid
+                  size="large"
+                  onClick={this.handleSubmitQuestion}
+                  disabled={disabled}
+                >
+                  Submit
+                </Button>
               </Form>
             </Segment>
           </Grid.Column>

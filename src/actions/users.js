@@ -6,8 +6,8 @@ export const receiveUsers = (users) => ({
   users,
 });
 
-export const addQuestionToUser = (questionId, authedUser) => ({
+export const addQuestionToUser = (question) => ({
   type: ADD_QUESTION_TO_USER,
-  questionId,
-  authedUser,
+  question,
 });
+//questionId, authedUser,questions
