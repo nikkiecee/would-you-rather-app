@@ -1,21 +1,22 @@
-import React from 'react';
-import { Route, Redirect, withRouter } from 'react-router-dom';
+import React from "react";
+import { Route, Redirect, withRouter } from "react-router-dom";
 
-function PrivateRoute({ component: Component, ...rest }) {
-  const redirect = rest.location.pathname;
-
-  return (
-    <Route {...rest} render={function(props) {
-      return (
-        rest.isAuthenticated
-        ? <Component {...props} />
-        : <Redirect to={{
-            pathname: '/login',
-            state: redirect
-          }} />
-      )}
-    } />
-  );
-}
+const PrivateRoute = ({ component: Component, isAuthenticated, ...rest }) => (
+  <Route
+    {...rest}
+    render={(props) =>
+      isAuthenticated ? (
+        <Component {...props} />
+      ) : (
+        <Redirect
+          to={{
+            pathname: "/login",
+            state: { from: props.location.pathname },
+          }}
+        />
+      )
+    }
+  />
+);
 
 export default withRouter(PrivateRoute);

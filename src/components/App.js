@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import { LoadingBar } from "react-redux-loading";
+import { LoadingBar } from "react-redux-loading-bar";
 import { handleInitialData } from "../actions/shared";
 import PrivateRoute from "./PrivateRoute";
 import Dashboard from "./Dashboard";
@@ -33,7 +33,7 @@ class App extends Component {
             exact
             path="/questions/:id"
             isAuthenticated={isAuthenticated}
-            component={QuestionCard}
+            render={(props)=> <QuestionCard {...props}/>}
           />
           <PrivateRoute
             exact

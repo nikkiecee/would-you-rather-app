@@ -21,12 +21,13 @@ class Login extends Component {
   };
 
   handleLogin = (e) => {
-    const {history} = this.props;
+    const {history, location} = this.props;
     e.preventDefault();
     this.props.dispatch(setAuthedUser(this.state.value));
-    return history.push('/')
+    // return history.push('/')
+     return history.push(location.state.from || '/')
+  
   };
-
   populateDropdown = () => {
     const { users } = this.props;
     return users.map((user) => ({
@@ -38,8 +39,7 @@ class Login extends Component {
   };
 
   render() {
-    console.log(this.state.value);
-
+  
     return (
       <div>
             <Grid
