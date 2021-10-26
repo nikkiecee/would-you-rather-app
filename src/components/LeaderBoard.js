@@ -16,7 +16,7 @@ class LeaderBoard extends Component {
       <Fragment>
         <Grid
           centered
-          style={{ height: "140vh", marginTop: "20px", textAlign: "center" }}
+          style={{ height: "100vh", marginTop: "20px", textAlign: "center" }}
           verticalAlign="top"
         >
           <Grid.Column style={{ maxWidth: 600 }}>
@@ -62,7 +62,7 @@ class LeaderBoard extends Component {
                             <strong>Score</strong>
                           </p>
                         </Label>
-                        <Label circular color="purple">
+                        <Label circular size="medium" color="purple">
                           {user.score}
                         </Label>
                       </Segment>

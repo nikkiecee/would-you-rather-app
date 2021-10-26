@@ -6,14 +6,14 @@ import { Button, Grid, Header, Segment, Image } from "semantic-ui-react";
 class PollPreview extends Component {
 
   render() {
-const { question, user, id } = this.props
+const { question, user } = this.props
 
     return (
       
       <div>
         <Grid
           textAlign="center"
-          style={{ height: "35vh", marginTop: "10px" }}
+          style={{ height: "35vh", marginTop: "20px" }}
           verticalAlign="top"
         >
           <Grid.Column style={{ maxWidth: 500}}>
@@ -30,7 +30,7 @@ const { question, user, id } = this.props
                   <Grid.Column width={11} textAlign="left">
                     <Header as="h4">Would you Rather...</Header>
                     <p>..{question.optionOne.text.substr(0,20)}...</p>
-                    <Link to={`question/${id}`}>
+                    <Link to={`/questions/${question.id}`}>
                       <Button fluid  color="purple" size="medium">
                         View Poll
                       </Button>
