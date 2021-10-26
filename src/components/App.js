@@ -18,10 +18,10 @@ class App extends Component {
     this.props.dispatch(handleInitialData());
   }
   render() {
-    const { isAuthenticated } = this.props;
+    const { isAuthenticated, authedUser } = this.props;
     return (
       <Router>
-        <NavBar />
+        <NavBar authedUser={authedUser}/>
         <LoadingBar />
         <Switch>
           <PrivateRoute

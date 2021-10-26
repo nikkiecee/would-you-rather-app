@@ -8,18 +8,18 @@ import {
   Header,
   Segment,
   Image,
+  Radio
 } from "semantic-ui-react";
 
 class QuestionCard extends Component {
   state = {
     value: ''
   };
-  handleSelectOption
+  handleSelectOption= (e,{value}) => this.setState({value})
   render() {
     
     const {questionAuthor,question} = this.props
     const {avatarURL, name } = questionAuthor
-    console.log(avatarURL)
     const {optionOne,optionTwo} = question
     const {value} = this.state
     const disabled = this.state.value !== "optionOne" && this.state.value !== "optionTwo";
@@ -46,15 +46,17 @@ class QuestionCard extends Component {
                     <Header as="h4">Would you Rather...</Header>
                     <Form size="large">
                       <Form.Group grouped>
-                        <Form.Radio
-                        //   control={Radio}
+                        <Radio
+                          control='input'
+                          type='radio'
                           label={optionOne.text}
                           value="optionOne"
                           checked={this.state.value === "optionOne"}
                           onChange={this.handleSelectOption}
                         />
-                        <Form.Radio
-                        //   control={Radio}
+                        <Radio
+                         control='input'
+                         type='radio'
                           label={optionTwo.text}
                           value="optionTwo"
                           checked={value === "optionTwo"}
@@ -85,6 +87,7 @@ class QuestionCard extends Component {
 }
 function mapStateToProps({ users, questions }, props) {
   const { id } = props.match.params;
+  console.log(props)
   const question = questions[id]; 
   const questionAuthor = users[question.author];
   return {
