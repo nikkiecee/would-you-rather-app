@@ -18,10 +18,10 @@ class App extends Component {
     this.props.dispatch(handleInitialData());
   }
   render() {
-    const { isAuthenticated, authedUser } = this.props;
+    const { isAuthenticated } = this.props;
     return (
       <Router>
-        <NavBar authedUser={authedUser}/>
+        <NavBar />
         <LoadingBar />
         <Switch>
           <PrivateRoute
@@ -63,7 +63,6 @@ class App extends Component {
 function mapStateToProps({ authedUser, users }) {
   return {
     isAuthenticated: authedUser !== null,
-    authedUser,
     users,
   };
 }

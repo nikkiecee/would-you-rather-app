@@ -1,40 +1,28 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import {
   Button,
   Form,
   Grid,
   Header,
   Segment,
-  Radio,
   Image,
+  Radio,
 } from "semantic-ui-react";
 
-//handleSelect
-
-//handleSubmitAnswer
-
-
-// handleVote = (e) => {
-//   e.preventDefault();
-
-//   this.props.dispatch(
-//     handleVote({
-//       qid: this.props.question.id,
-//       answer: this.state.selectedOption,
-//     })
-//   );
-
-//   this.setState({
-//     selectedOption: "",
-//   });
-
-//   this.props.history.push(`/questions/${this.props.question.id}/result`);
-// };
-
 class Poll extends Component {
+  state = {
+    value: "",
+  };
+  handleSelectOption = (e, { value }) => this.setState({ value });
   render() {
-    const { question, user } = this.props
+    const { questionAuthor, question} = this.props;
+    const { avatarURL, name } = questionAuthor;
+    const { optionOne, optionTwo } = question;
+    const { value } = this.state;
+    const disabled =
+      this.state.value !== "optionOne" && this.state.value !== "optionTwo";
 
     return (
       <div>
@@ -45,57 +33,48 @@ class Poll extends Component {
         >
           <Grid.Column style={{ maxWidth: 500 }}>
             <Header as="h5" block attached="top" textAlign="left">
-              <Header.Content>{user.name} asks:</Header.Content>
+              <Header.Content>{name} asks:</Header.Content>
             </Header>
 
             <Segment attached>
               <Grid columns={2} divided>
                 <Grid.Row>
                   <Grid.Column width={5}>
-                    <Image
-                      src={user.avatarURL}
-                      size="small"
-                      circular
-                    />
+                    <Image src={avatarURL} size="small" circular />
                   </Grid.Column>
                   <Grid.Column width={11} textAlign="left">
                     <Header as="h4">Would you Rather...</Header>
                     <Form size="large">
                       <Form.Group grouped>
+                        <Radio
+                          control="input"
+                          type="radio"
+                          label={optionOne.text}
+                          value="optionOne"
+                          checked={this.state.value === "optionOne"}
+                          onChange={this.handleSelectOption}
+                        />
+                        <br />
+                        <Radio
+                          control="input"
+                          type="radio"
+                          label={optionTwo.text}
+                          value="optionTwo"
+                          checked={value === "optionTwo"}
+                          onChange={this.handleSelectOption}
+                        />
                         <Form.Field>
-                          <Radio
-                            label={question.optionOne.text}
-                            name="options"
-                            value="optionOne"
-                            checked={this.state.value === "optionOne"}
-                            onChange={this.handleVote}
-                          />
-                        </Form.Field>
-                        <Form.Field>
-                          <Radio
-                            label={question.optionTwo.text}
-                            name="options"
-                            value="optionTwo"
-                            checked={this.state.value === "optionTwo"}
-                            onChange={this.handleVote}
-                          />
+                          <Button
+                            color="purple"
+                            fluid
+                            size="large"
+                            //   onclick={this.handleSubmitAnswer}
+                            disabled={disabled}
+                          >
+                            Submit
+                          </Button>
                         </Form.Field>
                       </Form.Group>
-
-                      <Form.Field>
-                        <Button
-                          color="purple"
-                          fluid
-                          size="large"
-                          onclick={this.handleSubmitAnswer}
-                          disabled={
-                            this.state.selectedOption !== "optionOne" &&
-                            this.state.selectedOption !== "optionTwo"
-                          }
-                        >
-                          Submit
-                        </Button>
-                      </Form.Field>
                     </Form>
                   </Grid.Column>
                 </Grid.Row>
@@ -107,14 +86,15 @@ class Poll extends Component {
     );
   }
 }
-function mapStateToProps({ users, questions, authedUser }, { questionId }) {
-  const question = questions[questionId];
-  const user = users[question.author];
+function mapStateToProps({ users, questions, authedUser }, props) {
+  const { id } = props.match.params;
+  const question = questions[id];
+  const questionAuthor = users[question.author];
   return {
+    questionAuthor,
     question,
-    user,
-    authedUser,
-    id: questionId,
   };
 }
-export default connect(mapStateToProps)(Poll);
+
+export default withRouter(connect(mapStateToProps)(Poll));
+

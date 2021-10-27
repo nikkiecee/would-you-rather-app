@@ -89,11 +89,11 @@ let questions = {
     author: 'johndoe',
     timestamp: 1468479767190,
     optionOne: {
-      votes: ['nicoleeluwa'],
+      votes: ['nicoleeluwa', 'sarahedo','johndoe'],
       text: 'become a superhero',
     },
     optionTwo: {
-      votes: ['johndoe', 'sarahedo'],
+      votes: [],
       text: 'become a supervillian'
     }
   },
@@ -154,11 +154,11 @@ let questions = {
     author: 'tylermcginnis',
     timestamp: 1489579767190,
     optionOne: {
-      votes: ['tylermcginnis', 'scottjames'],
+      votes: ['tylermcginnis'],
       text: 'find $50 yourself',
     },
     optionTwo: {
-      votes: ['johndoe'],
+      votes: ['johndoe', 'scottjames'],
       text: 'have your best friend find $500'
     }
   },

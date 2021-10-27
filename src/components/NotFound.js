@@ -1,15 +1,24 @@
-import React from "react";
-import { Header } from "semantic-ui-react";
+import React, { Component } from "react";
+import { Header,Grid } from "semantic-ui-react";
 import NavBar from "./NavBar";
 
-const NotFound = () => {
-  <div>
-    <NavBar />
-    <Header as="h1" textAlign="center" verticalAlign='middle'>
-      404- Page NotFound
-    </Header>
-    ;
-  </div>;
-};
-
+class NotFound extends Component {
+  render() {
+    return (
+      <div>
+        <NavBar />
+        <Grid centered >
+        <Header
+          as="h1"
+          textAlign="center"
+          verticalAlign="middle"
+          fontSize="80px"
+        >
+          404- Page NotFound
+        </Header>
+        </Grid>
+      </div>
+    );
+  }
+}
 export default NotFound;

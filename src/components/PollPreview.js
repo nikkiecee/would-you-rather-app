@@ -28,7 +28,7 @@ const { question, user } = this.props
                     <Image src={user.avatarURL} size="small" circular />
                   </Grid.Column>
                   <Grid.Column width={11} textAlign="left">
-                    <Header as="h4">Would you Rather...</Header>
+                    <Header as="h4" textAlign="left">Would you Rather...</Header>
                     <p>..{question.optionOne.text.substr(0,20)}...</p>
                     <Link to={`/questions/${question.id}`}>
                       <Button fluid  color="purple" size="medium">
