@@ -1,8 +1,15 @@
+import sarah from './sarah.jpg';
+import tyler from './tyler.jpg';
+import scott from './scott.jpg';
+import nicole from './nicole.jpg';
+import john from './john.jpg';
+
+
 let users = {
   sarahedo: {
     id: 'sarahedo',
     name: 'Sarah Edo',
-    avatarURL: './images/sarah.jpg',
+    avatarURL: sarah,
     answers: {
       "8xf0y6ziyjabvozdd253nd": 'optionOne',
       "6ni6ok3ym7mf1p33lnez": 'optionOne',
@@ -14,7 +21,7 @@ let users = {
   nicoleeluwa: {
     id: 'nicoleeluwa',
     name: 'Nicole Eluwa',
-    avatarURL: './images/nicole.jpg',
+    avatarURL: nicole,
     answers: {
       "8xf0y6ziyjabvozdd253nd": 'optionOne',
       "6ni6ok3ym7mf1p33lnez": 'optionOne',
@@ -26,7 +33,8 @@ let users = {
   tylermcginnis: {
     id: 'tylermcginnis',
     name: 'Tyler McGinnis',
-    avatarURL: './images/tyler.jpg'
+    avatarURL: tyler
+    // avatarURL: './images/tyler.jpg'
     ,
     answers: {
       "vthrdm985a262al8qx3do": 'optionOne',
@@ -37,7 +45,7 @@ let users = {
   scottjames: {
     id: 'scottjames',
     name: 'Scott James',
-    avatarURL: './images/scott.jpg',
+    avatarURL: scott,
     answers: {
       "vthrdm985a262al8qx3do": 'optionTwo',
       "xj352vofupe1dqz9emx13r": 'optionOne',
@@ -47,7 +55,7 @@ let users = {
   johndoe: {
     id: 'johndoe',
     name: 'John Doe',
-    avatarURL: './images/john.jpg',
+    avatarURL: john,
     answers: {
       "xj352vofupe1dqz9emx13r": 'optionOne',
       "vthrdm985a262al8qx3do": 'optionTwo',
@@ -229,7 +237,7 @@ export function _saveQuestion (question) {
       }
 
       res(formattedQuestion)
-    }, 1000)
+    }, 1000) 
   })
 }
 

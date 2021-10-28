@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Menu, Image, Button } from "semantic-ui-react";
-import { Link, } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { removeAuthedUser } from "../actions/authedUser";
@@ -8,12 +8,11 @@ import { removeAuthedUser } from "../actions/authedUser";
 class NavBar extends Component {
   state = { activeItem: "" };
 
-   handleLogout = (e) => {
+  handleLogout = (e) => {
     e.preventDefault();
-    const {history} = this.props;
-    console.log(this.props);
-    this.props.dispatch(removeAuthedUser())
-    return history.push('/')
+    const { history } = this.props;
+    this.props.dispatch(removeAuthedUser());
+    return history.push("/");
   };
 
   render() {
@@ -59,15 +58,14 @@ class NavBar extends Component {
                     {users[authedUser].name}
                   </span>
                 </Menu.Item>
-                <Menu.Item
-                />
+                <Menu.Item />
                 <Button
                   basic
                   compact
-                  content='Logout'
-                  labelPosition='right'
+                  content="Logout"
+                  labelPosition="right"
                   size="small"
-                  icon='log out'
+                  icon="log out"
                   onClick={this.handleLogout}
                   style={{ marginBottom: "0.5em", marginTop: "0.5em" }}
                 />

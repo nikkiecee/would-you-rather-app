@@ -29,12 +29,12 @@ const panes = (props) => {
       render: () => (
         <Tab.Pane>
           {unansweredQuestions.map((question) => (
-           <PollPreview
-           key={question.id}
-           questionId={question.id}
-           question={question}
-           answered={false}
-         />
+            <PollPreview
+              key={question.id}
+              questionId={question.id}
+              question={question}
+              answered={false}
+            />
           ))}
         </Tab.Pane>
       ),
@@ -45,11 +45,11 @@ const panes = (props) => {
         <Tab.Pane>
           {answeredQuestions.map((question) => (
             <PollPreview
-            key={question.id}
-            question={question}
-            questionId={question.id}
-            answered={true}
-          />
+              key={question.id}
+              question={question}
+              questionId={question.id}
+              answered={true}
+            />
           ))}
         </Tab.Pane>
       ),
@@ -59,9 +59,13 @@ const panes = (props) => {
 
 function mapStateToProps({ questions, users, authedUser }) {
   const currentUser = users[authedUser];
-  const answeredQid =Object.keys(currentUser.answers);
-  const answeredQuestions=Object.values(questions).filter(question => answeredQid.includes(question.id)).sort((a, b) => b.timestamp - a.timestamp)
-  const unansweredQuestions=Object.values(questions).filter(question => !answeredQid.includes(question.id)).sort((a, b) => b.timestamp - a.timestamp)
+  const answeredQid = Object.keys(currentUser.answers);
+  const answeredQuestions = Object.values(questions)
+    .filter((question) => answeredQid.includes(question.id))
+    .sort((a, b) => b.timestamp - a.timestamp);
+  const unansweredQuestions = Object.values(questions)
+    .filter((question) => !answeredQid.includes(question.id))
+    .sort((a, b) => b.timestamp - a.timestamp);
   return {
     unansweredQuestions,
     answeredQuestions,

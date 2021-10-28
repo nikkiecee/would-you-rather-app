@@ -15,7 +15,6 @@ class PollResult extends Component {
     const {
       question,
       questionAuthor,
-      //   authedUser,
       optionOneVotes,
       optionTwoVotes,
       totalVotes,
@@ -48,7 +47,7 @@ class PollResult extends Component {
                     <>
                       {optionOneVoted === true ? (
                         <>
-                          <Segment>
+                          <Segment >
                             <Label as="a" color="yellow" ribbon="right">
                               Your Vote
                             </Label>
@@ -67,11 +66,7 @@ class PollResult extends Component {
                             <p>
                               <strong>{optionTwo.text}</strong>
                             </p>
-                            <Progress
-                              percent={optionTwoPercentage}
-                              progress
-                              color="purple"
-                            >
+                            <Progress percent={optionTwoPercentage} progress>
                               {optionTwoVotes} out of {totalVotes} votes
                             </Progress>
                           </Segment>
@@ -82,11 +77,7 @@ class PollResult extends Component {
                             <p>
                               <strong>{optionOne.text}</strong>
                             </p>
-                            <Progress
-                              percent={optionOnePercentage}
-                              color="purple"
-                              progress
-                            >
+                            <Progress percent={optionOnePercentage} progress>
                               {optionOneVotes} out of {totalVotes} votes
                             </Progress>
                           </Segment>
@@ -129,8 +120,8 @@ function mapStateToProps({ users, questions, authedUser }, { id }) {
   const totalVotes = optionOneVotes + optionTwoVotes;
   const optionOnePercentage = ((optionOneVotes / totalVotes) * 100).toFixed(1);
   const optionTwoPercentage = ((optionTwoVotes / totalVotes) * 100).toFixed(1);
-  const optionOneVoted = optionOne.votes.includes(authedUser)
-//   const optionTwoVoted = optionTwo.votes[authedUser];
+  const optionOneVoted = optionOne.votes.includes(authedUser);
+  const optionTwoVoted = optionTwo.votes[authedUser];
   return {
     question,
     questionAuthor,
@@ -141,6 +132,7 @@ function mapStateToProps({ users, questions, authedUser }, { id }) {
     optionTwoPercentage,
     optionOnePercentage,
     optionOneVoted,
+    optionTwoVoted,
   };
 }
 

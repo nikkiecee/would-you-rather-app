@@ -1,12 +1,10 @@
 import React, { Component } from "react";
 import { Header,Grid } from "semantic-ui-react";
-import NavBar from "./NavBar";
 
 class NotFound extends Component {
   render() {
     return (
       <div>
-        <NavBar />
         <Grid centered >
         <Header
           as="h1"

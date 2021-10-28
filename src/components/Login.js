@@ -21,12 +21,10 @@ class Login extends Component {
   };
 
   handleLogin = (e) => {
-    const {history, location} = this.props;
+    const { history, location } = this.props;
     e.preventDefault();
     this.props.dispatch(setAuthedUser(this.state.value));
-    // return history.push('/')
-     return history.push(location.state.from || '/')
-  
+    return history.push(location.state.from || "/");
   };
   populateDropdown = () => {
     const { users } = this.props;
@@ -39,55 +37,52 @@ class Login extends Component {
   };
 
   render() {
-  
     return (
       <div>
-            <Grid
-              textAlign="center"
-              style={{ height: "100vh", marginTop: "20px" }}
-              verticalAlign="top"
-            >
-              <Grid.Column style={{ maxWidth: 500 }}>
-                <Header as="h3" block attached="top" textAlign="center">
-                  <Header.Content>
-                    Welcome to the Would You Rather App!
-                  </Header.Content>
-                  <Header.Subheader>
-                    Please sign in to continue
-                  </Header.Subheader>
+        <Grid
+          textAlign="center"
+          style={{ height: "100vh", marginTop: "20px" }}
+          verticalAlign="top"
+        >
+          <Grid.Column style={{ maxWidth: 500 }}>
+            <Header as="h3" block attached="top" textAlign="center">
+              <Header.Content>
+                Welcome to the Would You Rather App!
+              </Header.Content>
+              <Header.Subheader>Please sign in to continue</Header.Subheader>
+            </Header>
+            <Form size="large">
+              <Segment attached>
+                <Icon
+                  name="rss square"
+                  color="purple"
+                  size="huge"
+                  justify="center"
+                />
+                <Header as="h3" textAlign="center">
+                  Sign In
                 </Header>
-                <Form size="large">
-                  <Segment attached>
-                    <Icon
-                      name="rss square"
-                      color="purple"
-                      size="huge"
-                      justify="center"
-                    />
-                    <Header as="h3" textAlign="center">
-                      Sign In
-                    </Header>
-                    <Dropdown
-                      placeholder="Select User"
-                      style={{ marginBottom: "20px" }}
-                      fluid
-                      selection
-                      options={this.populateDropdown()}
-                      onChange={this.handleSelect}
-                      value={this.state.value}
-                    />
-                    <Button
-                      color="purple"
-                      fluid
-                      size="large"
-                      onClick={this.handleLogin}
-                    >
-                      Sign in
-                    </Button>
-                  </Segment>
-                </Form>
-              </Grid.Column>
-            </Grid>
+                <Dropdown
+                  placeholder="Select User"
+                  style={{ marginBottom: "20px" }}
+                  fluid
+                  selection
+                  options={this.populateDropdown()}
+                  onChange={this.handleSelect}
+                  value={this.state.value}
+                />
+                <Button
+                  color="purple"
+                  fluid
+                  size="large"
+                  onClick={this.handleLogin}
+                >
+                  Sign in
+                </Button>
+              </Segment>
+            </Form>
+          </Grid.Column>
+        </Grid>
       </div>
     );
   }

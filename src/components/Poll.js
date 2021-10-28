@@ -10,17 +10,27 @@ import {
   Image,
   Radio,
 } from "semantic-ui-react";
+import { handleSaveAnswer } from "../actions/questions";
 
 class Poll extends Component {
   state = {
     value: "",
   };
-  handleSelectOption = (e, { value }) => this.setState({ value });
+  handleUserSelection = (e, { value }) => this.setState({ value });
+
+  handleSubmitAnswer = (e) => {
+    e.preventDefault();
+    const { dispatch, authedUser, id } = this.props;
+    const { value } = this.state;
+    dispatch(
+      handleSaveAnswer({ authedUser: authedUser, qid: id, answer: value })
+    );
+  };
+
   render() {
-    const { questionAuthor, question} = this.props;
+    const { questionAuthor, question } = this.props;
     const { avatarURL, name } = questionAuthor;
     const { optionOne, optionTwo } = question;
-    const { value } = this.state;
     const disabled =
       this.state.value !== "optionOne" && this.state.value !== "optionTwo";
 
@@ -52,7 +62,7 @@ class Poll extends Component {
                           label={optionOne.text}
                           value="optionOne"
                           checked={this.state.value === "optionOne"}
-                          onChange={this.handleSelectOption}
+                          onChange={this.handleUserSelection}
                         />
                         <br />
                         <Radio
@@ -60,15 +70,15 @@ class Poll extends Component {
                           type="radio"
                           label={optionTwo.text}
                           value="optionTwo"
-                          checked={value === "optionTwo"}
-                          onChange={this.handleSelectOption}
+                          checked={this.state.value === "optionTwo"}
+                          onChange={this.handleUserSelection}
                         />
                         <Form.Field>
                           <Button
                             color="purple"
                             fluid
                             size="large"
-                            //   onclick={this.handleSubmitAnswer}
+                            onClick={this.handleSubmitAnswer}
                             disabled={disabled}
                           >
                             Submit
@@ -91,10 +101,11 @@ function mapStateToProps({ users, questions, authedUser }, props) {
   const question = questions[id];
   const questionAuthor = users[question.author];
   return {
+    authedUser,
     questionAuthor,
     question,
+    id,
   };
 }
 
 export default withRouter(connect(mapStateToProps)(Poll));
-

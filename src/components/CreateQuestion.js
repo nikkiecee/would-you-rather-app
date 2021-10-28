@@ -27,7 +27,8 @@ class CreateQuestion extends Component {
     return history.push("/");
   };
   render() {
-    const disabled = this.state.optionOneText ==='' || this.state.optionTwoText ==='';
+    const disabled =
+      this.state.optionOneText === "" || this.state.optionTwoText === "";
     const { optionOneText, optionTwoText } = this.state;
     return (
       <div>
