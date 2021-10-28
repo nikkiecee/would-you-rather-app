@@ -13,7 +13,7 @@ const { question, user } = this.props
       <div>
         <Grid
           textAlign="center"
-          style={{ height: "35vh", marginTop: "20px" }}
+          style={{ height: "35vh", marginTop: "10px" }}
           verticalAlign="top"
         >
           <Grid.Column style={{ maxWidth: 500}}>

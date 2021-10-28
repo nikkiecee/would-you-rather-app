@@ -11,6 +11,7 @@ import Login from "./Login";
 import QuestionCard from "./QuestionCard";
 import CreateQuestion from "./CreateQuestion";
 import LeaderBoard from "./LeaderBoard";
+import NotFound from "./NotFound";
 
 class App extends Component {
   componentDidMount() {
@@ -23,6 +24,7 @@ class App extends Component {
         <NavBar />
         <LoadingBar />
         <Switch>
+        <Route exact path="/login" component={Login} />
           <PrivateRoute
             exact
             path="/"
@@ -47,7 +49,8 @@ class App extends Component {
             isAuthenticated={isAuthenticated}
             component={LeaderBoard}
           />
-          <Route exact path="/login" component={Login} />
+          <Route  component={NotFound} />
+          
         </Switch>
       </Router>
     );

@@ -1,19 +1,19 @@
 import React, { Component } from "react";
-import { Header,Grid } from "semantic-ui-react";
+import { Grid, Image } from "semantic-ui-react";
+import error from '../404.png'
 
 class NotFound extends Component {
   render() {
     return (
       <div>
-        <Grid centered >
-        <Header
-          as="h1"
-          textAlign="center"
-          verticalAlign="middle"
-          fontSize="80px"
-        >
-          404- Page NotFound
-        </Header>
+        <Grid style={{marginTop: 30}}>
+        <Image
+          src={error}
+          alt='error png'
+          verticalAlign='middle'
+          centered
+        />
+        
         </Grid>
       </div>
     );
